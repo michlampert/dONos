@@ -2,3 +2,4 @@ Flask
 sqlalchemy
 mysqlclient
 Flask-SQLAlchemy
+flask-cors

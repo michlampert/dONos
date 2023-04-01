@@ -81,8 +81,10 @@ def get_leaderboard():
 
     return [{
         'name': result[0] + " " + result[1],
-        "pos": result[2],
-        "neg": result[3]
+        'points':{
+            "plus": result[2],
+            "minus": result[3]
+        }
     } for result in results]
     
 

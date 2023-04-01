@@ -21,7 +21,7 @@
           <ion-label>stwórz nową</ion-label>
         </ion-button>
       </ion-item>
-      {{ profileStore.$state.name }}
+      Hello {{ myName }}! 
 
       <NewDenunciation></NewDenunciation>
     
@@ -35,13 +35,25 @@ import { profileStore } from '@/state';
 import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonInput, IonItem, IonButton, IonLabel, IonIcon } from '@ionic/vue';
 import { addCircle, arrowForwardCircle } from 'ionicons/icons';
 import { mapStores } from 'pinia';
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 import Header from '@/components/Header.vue';
 import NewDenunciation from '@/components/NewDenunciation.vue';
 
+import { getMyName } from '../service'
+
 export default defineComponent({
   setup() {
-    return { addCircle, arrowForwardCircle }
+    const myName=ref('')
+
+    const getName = async ()=> {
+      const value = await getMyName(1);
+
+      myName.value=value;
+    };
+
+    getName();
+
+    return { addCircle, arrowForwardCircle, myName }
   },
   components: {
     IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonInput, IonItem, IonButton, IonLabel, IonIcon,
