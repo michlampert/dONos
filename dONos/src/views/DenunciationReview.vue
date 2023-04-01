@@ -1,10 +1,6 @@
 <template>
   <ion-page>
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>Denunciation Review</ion-title>
-      </ion-toolbar>
-    </ion-header>
+    <Header></Header>
     <ion-content :fullscreen="true">
       <ion-header collapse="condense">
         <ion-toolbar>
@@ -20,19 +16,20 @@
 <script lang="ts">
 import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
 import { defineComponent } from 'vue'
+import Header from '@/components/Header.vue';
 
 export default defineComponent({
-    setup () {
-        
+  setup() {
 
-        return {}
-    },
-    components: {
-        IonPage, IonHeader, IonToolbar, IonTitle, IonContent
-    }
+
+    return {}
+  },
+  components: {
+    IonPage, IonHeader, IonToolbar, IonTitle, IonContent,
+
+    Header
+  }
 })
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

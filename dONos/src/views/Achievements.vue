@@ -1,10 +1,6 @@
 <template>
     <ion-page>
-        <ion-header>
-            <ion-toolbar>
-                <ion-title>Achievements</ion-title>
-            </ion-toolbar>
-        </ion-header>
+        <Header></Header>
         <ion-content :fullscreen="true">
             <ion-header collapse="condense">
                 <ion-toolbar>
@@ -18,7 +14,10 @@
             <Achievement :icon="triangle" title="title" desc="desc" :is-active="true"></Achievement>
             <Achievement :icon="triangle" title="title" desc="desc"></Achievement>
 
+            <NewDenunciation></NewDenunciation>
+            
         </ion-content>
+
     </ion-page>
 </template>
 
@@ -27,6 +26,8 @@ import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue
 import Achievement from '@/components/Achievement.vue';
 import { triangle } from 'ionicons/icons';
 import { defineComponent } from 'vue'
+import Header from '@/components/Header.vue';
+import NewDenunciation from '@/components/NewDenunciation.vue';
 
 export default defineComponent({
     setup() {
@@ -35,9 +36,16 @@ export default defineComponent({
         return { triangle }
     },
     components: {
-        Achievement,
-        IonPage, IonHeader, IonToolbar, IonTitle, IonContent
-    }
+    Achievement,
+    IonPage,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonContent,
+    
+    Header,
+    NewDenunciation,
+}
 })
 </script>
 

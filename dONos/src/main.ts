@@ -27,7 +27,9 @@ import { createPinia } from 'pinia';
 const pinia = createPinia()
 
 const app = createApp(App)
-  .use(IonicVue)
+  .use(IonicVue, {
+    mode: 'md'
+  })
   .use(router)
   .use(pinia);
   

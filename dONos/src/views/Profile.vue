@@ -1,10 +1,6 @@
 <template>
   <ion-page>
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>Profile</ion-title>
-      </ion-toolbar>
-    </ion-header>
+    <Header></Header>
     <ion-content :fullscreen="true">
       <ion-header collapse="condense">
         <ion-toolbar>
@@ -26,7 +22,11 @@
         </ion-button>
       </ion-item>
       {{ profileStore.$state.name }}
+
+      <NewDenunciation></NewDenunciation>
+    
     </ion-content>
+
   </ion-page>
 </template>
 
@@ -36,13 +36,18 @@ import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonInput, IonItem
 import { addCircle, arrowForwardCircle } from 'ionicons/icons';
 import { mapStores } from 'pinia';
 import { defineComponent } from 'vue'
+import Header from '@/components/Header.vue';
+import NewDenunciation from '@/components/NewDenunciation.vue';
 
 export default defineComponent({
   setup() {
     return { addCircle, arrowForwardCircle }
   },
   components: {
-    IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonInput, IonItem, IonButton, IonLabel, IonIcon
+    IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonInput, IonItem, IonButton, IonLabel, IonIcon,
+
+    Header,
+    NewDenunciation,
   },
   computed: {
     ...mapStores(profileStore)

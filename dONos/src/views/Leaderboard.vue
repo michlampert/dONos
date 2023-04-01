@@ -1,43 +1,46 @@
 <template>
     <ion-page>
-        <ion-header>
-            <ion-img src="../../public/logo.png" alt=""></ion-img>
-            <ion-icon>
+        <Header></Header>
 
-            </ion-icon>
-        </ion-header>
         <ion-content :fullscreen="true">
-            <ion-header collapse="condense">
-                <ion-toolbar>
-                    <ion-title size="large">Leaderboard</ion-title>
-                </ion-toolbar>
-            </ion-header>
 
-            <LeaderboardProfile v-for="profile, index in profiles" :name="index + 1 + '. ' +profile.name" :points="profile.points"></LeaderboardProfile>
+            <LeaderboardProfile v-for="profile, index in profiles" :name="index + 1 + '. ' + profile.name"
+                :points="profile.points"></LeaderboardProfile>
+
+                <NewDenunciation></NewDenunciation>
+                
         </ion-content>
+
     </ion-page>
+
 </template>
 
 <script lang="ts">
 import LeaderboardProfile from '@/components/LeaderboardProfile.vue';
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonIcon } from '@ionic/vue';
+import { IonPage, IonToolbar, IonTitle, IonContent, IonIcon, IonImg, IonGrid, IonRow, IonCol, IonFab, IonFabButton } from '@ionic/vue';
 import { defineComponent } from 'vue'
+import Header from '@/components/Header.vue'
+import NewDenunciation from '@/components/NewDenunciation.vue';
 
 export default defineComponent({
     setup() {
 
 
-        return {}
+        return { }
     },
     components: {
         IonPage,
-        IonHeader,
         IonToolbar,
         IonTitle,
         IonContent,
         IonIcon,
+        IonImg,
+        IonGrid, IonRow, IonCol,
+        IonFab, IonFabButton,
 
-        LeaderboardProfile
+        LeaderboardProfile,
+        Header,
+        NewDenunciation,
     },
     computed: {
         profiles: () => [
