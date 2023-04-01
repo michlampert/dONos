@@ -5,8 +5,7 @@ CREATE TABLE Company (
 
 CREATE TABLE Employee (
     EmployeeID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    FirstName VARCHAR(255),
-    LastName VARCHAR(255),
+    Name VARCHAR(255),
     CompanyID INT NOT NULL,
 
     FOREIGN KEY (CompanyID) REFERENCES Company(CompanyID)

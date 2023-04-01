@@ -19,12 +19,12 @@ def get_me():
     employee_id = request.args.get('id')
 
     results = db.session.execute(
-        text("select FirstName, LastName from Employee where EmployeeID = :employee_id"),
+        text("select Name from Employee where EmployeeID = :employee_id"),
         {'employee_id': employee_id}
     ).fetchone()
 
     return jsonify({
-        'name': results[0] + " " + results[1]
+        'name': results[0]
     })
     
 
@@ -45,17 +45,15 @@ def add_company():
 
 @app.post('/employee/add')
 def add_employee():
-    first_name = request.json.get('first_name')
-    last_name = request.json.get('last_name')
+    name = request.json.get('name')
     company_id = request.json.get('company_id')
 
     db.session.execute(
         text(
-            "insert into Employee (FirstName, LastName, CompanyID)"
-            " values (:first_name, :last_name, :company_id)"
+            "insert into Employee (Name, CompanyID)"
+            " values (:name, :company_id)"
         ), {
-            'first_name': first_name,
-            'last_name': last_name,
+            'name': name,
             'company_id': company_id
     })
     db.session.commit() 
@@ -68,22 +66,23 @@ def get_leaderboard():
     company_id = request.args.get('company_id')
 
     results = db.session.execute(
-        text("select t1.FirstName, t1.LastName, pos, neg from"
-             " (select FirstName, LastName, SUM(Score) as pos from Employee"
-             "     join Donos on Donor = EmployeeID"
-             "     where CompanyID = :company_id group by FirstName, LastName) t1"
-             " join (select FirstName, LastName, SUM(Score) as neg"
+        text("select t1.Name, pos, neg from Employee as b"
+             " join (select Name, SUM(Score) as pos from Employee"
+             "     left join Donos on Donor = EmployeeID"
+             "     where CompanyID = :company_id group by Name) t1 on t1.Name = b.Name"
+             " left join (select Name, SUM(Score) as neg"
              " from Employee join Donos on Receiver = EmployeeID"
-             " where CompanyID = :company_id group by FirstName, LastName) t2 on"
-             " t1.FirstName = t2.FirstName and t1.LastName = t2.LastName;"),
+             " where CompanyID = :company_id group by Name) t2 on"
+             " t1.Name = t2.Name;"
+             ),
         {'company_id': company_id}
     )
 
     return [{
-        'name': result[0] + " " + result[1],
+        'name': result[0],
         'points':{
-            "plus": result[2],
-            "minus": result[3]
+            "plus": result[1] or 0,
+            "minus": result[2] or 0
         }
     } for result in results]
     
@@ -96,8 +95,8 @@ def add_donos():
     receiver = request.json.get('receiver_id')
 
     db.session.execute(
-        text("insert into Donos (Content, Donor, Receiver, status) "
-             "values (:content, :donor, :receiver, 'waiting')"), 
+        text("insert into Donos (Content, Donor, Receiver, status, score) "
+             "values (:content, :donor, :receiver, 'accepted', 15)"), 
         {
             'content': content, 'donor': donor, 'receiver': receiver
         }
