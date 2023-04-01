@@ -4,14 +4,19 @@
     <ion-content :fullscreen="true">
       <ion-item-sliding>
         <ion-item-options side="start" expandable>
-          <ion-item-option color="success" @click="$emit('delete')" expandable>
+          <ion-item-option color="success" @click="acceptDenunciation()" expandable @ionSwape="acceptDenunciation()">
             <!-- <ion-icon slot="icon-only" :icon="archive"></ion-icon> -->
             accept
+          </ion-item-option>
+
+          <ion-item-option color="primary" @click="superDenunciation()">
+            <!-- <ion-icon slot="icon-only" :icon="archive"></ion-icon> -->
+            super
           </ion-item-option>
         </ion-item-options>
 
         <ion-item-options side="end" expandable>
-          <ion-item-option color="danger" @click="$emit('delete')" expandable>
+          <ion-item-option color="danger" @click="rejectDenunciation()" expandable @ionSwape="rejectDenunciation()">
             <!-- <ion-icon slot="icon-only" :icon="archive"></ion-icon> -->
             reject
           </ion-item-option>
@@ -32,6 +37,7 @@
 import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonItemSliding, IonItemOptions, IonItemOption, IonItem, IonIcon, IonLabel } from '@ionic/vue';
 import { defineComponent } from 'vue'
 import Header from '@/components/Header.vue';
+import { showToast } from '@/toast';
 
 export default defineComponent({
   setup() {
@@ -43,6 +49,17 @@ export default defineComponent({
     IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonItemSliding, IonItemOptions, IonItemOption, IonItem, IonIcon, IonLabel,
 
     Header
+  },
+  methods: {
+    acceptDenunciation() {
+      showToast("accept")
+    },
+    superDenunciation() {
+      showToast("super")
+    },
+    rejectDenunciation() {
+      showToast("reject")
+    },
   }
 })
 </script>
