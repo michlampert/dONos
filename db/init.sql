@@ -12,6 +12,7 @@ CREATE TABLE Employee (
 );
 
 CREATE TABLE Donos (
+    DonosID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     Content TEXT,
     Donor INT NOT NULL,
     Receiver INT NOT NULL,

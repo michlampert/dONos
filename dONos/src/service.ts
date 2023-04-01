@@ -53,3 +53,34 @@ export function getMyName(myId: number): Promise<string> {
       })
       .then(response => response.data)
 }
+
+
+export function acceptDonos(donosID: number): void {
+    axios<void>({
+        method: 'post',
+        url: `${baseUrl}/donos/${donosID}/accept`
+      })
+}
+
+
+export function rejectDonos(donosID: number): void {
+    axios<void>({
+        method: 'post',
+        url: `${baseUrl}/donos/${donosID}/reject`
+      })
+}
+
+export function superDonos(donosID: number): void {
+    axios<void>({
+        method: 'post',
+        url: `${baseUrl}/donos/${donosID}/super`
+      })
+}
+
+export function getDonos(companyID: number): Promise<Donos> {
+    axios<Donos>({
+        method: 'get',
+        url: `${baseUrl}/donos/?company_id=${companyID}`
+      })
+      .then(response => response.data)
+}

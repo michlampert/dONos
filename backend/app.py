@@ -77,14 +77,14 @@ def get_leaderboard():
              ),
         {'company_id': company_id}
     )
-
+    sorted_results = sorted(results, key=lambda x: - int(x[1] or 0) + int(x[2] or 0))
     return [{
         'name': result[0],
         'points':{
             "plus": result[1] or 0,
             "minus": result[2] or 0
         }
-    } for result in results]
+    } for result in sorted_results]
     
 
 
@@ -96,7 +96,7 @@ def add_donos():
 
     db.session.execute(
         text("insert into Donos (Content, Donor, Receiver, status, score) "
-             "values (:content, :donor, :receiver, 'accepted', 15)"), 
+             "values (:content, :donor, :receiver, 'waiting', 0)"), 
         {
             'content': content, 'donor': donor, 'receiver': receiver
         }
@@ -104,6 +104,65 @@ def add_donos():
     db.session.commit() 
 
     return jsonify(success=True)
+
+
+@app.post('/donos/<id>/accept')
+def accept_donos(id: int):
+    db.session.execute(
+        text("update Donos set Status = 'accepted', Score = 15 where DonosID = :id"), 
+        {
+            'id': id
+        }
+    )
+    db.session.commit() 
+
+    return jsonify(success=True)
+
+
+@app.post('/donos/<id>/reject')
+def reject_donos(id: int):
+    db.session.execute(
+        text("update Donos set Status = 'rejected', Score = 0 where DonosID = :id"), 
+        {
+            'id': id
+        }
+    )
+    db.session.commit() 
+
+    return jsonify(success=True)
+
+
+@app.post('/donos/<id>/super')
+def super_donos(id: int):
+    db.session.execute(
+        text("update Donos set Status = 'accepted', Score = 25 where DonosID = :id"), 
+        {
+            'id': id
+        }
+    )
+    db.session.commit() 
+
+    return jsonify(success=True)
+
+
+@app.get('/donos/')
+def get_donos():
+    company_id = request.args.get('company_id')
+
+    results = db.session.execute(
+        text("select DonosID, Content, d.Name as dName, r.Name as rName"
+             " from Donos join Employee as d on d.EmployeeID = Donor"
+             " join Employee as r on r.EmployeeID = Receiver"
+             " where Status = 'waiting' and d.CompanyID = :company_id;"),
+        {'company_id': company_id}
+    )
+    results = list(results)
+    return [{
+        'id': result[0],
+        'content': result[1],
+        'donor_name': result[2],
+        'receiver_name': result[3]
+    } for result in results]
 
 
 if __name__ == "__main__":
