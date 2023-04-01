@@ -1,13 +1,8 @@
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import text
 from flask import jsonify, request
 
-
-db = SQLAlchemy()
-app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "mysql://root:password@db/db"
-db.init_app(app)
+from setup import app, db
+from queries import get_company_id, get_leaderboard
 
 
 @app.get('/home/')
@@ -35,16 +30,55 @@ def add_company():
 
 @app.post('/employee/add')
 def add_employee():
-    first_name = request.form.get('first_name')
-    last_name = request.form.get('last_name')
+    first_name = request.json.get('first_name')
+    last_name = request.json.get('last_name')
+    company_id = request.json.get('company_id')
 
     db.session.execute(
         text(
-            "insert into Employee (FirstName, LastName) values (:first_name, :last_name)"
+            "insert into Employee (FirstName, LastName, CompanyID)"
+            " values (:first_name, :last_name, :company_id)"
         ), {
             'first_name': first_name,
-            'last_name': last_name
-    })    
+            'last_name': last_name,
+            'company_id': company_id
+    })
+    db.session.commit() 
+
+    return jsonify(success=True)
+
+
+@app.post('/leaderboard/add')
+def add_leaderboard():
+    comapny_name = request.json.get("name")
+
+    company_id = get_company_id(comapny_name)
+
+    db.session.execute(
+        text("insert into Leaderboard (CompanyID) values (:company_id)"), 
+        {'company_id': company_id}
+    )
+    db.session.commit() 
+
+    return jsonify(success=True)
+
+
+@app.post('/donos/add')
+def add_donos():
+    content = request.json.get('content')
+    donor = request.json.get('donor_id')
+    receiver = request.json.get('receiver_id')
+    leaderboard = get_leaderboard(request.json.get('company_id'))
+
+    db.session.execute(
+        text("insert into Donos (Content, Donor, Receiver, LeaderboardID, status) "
+             "values (:content, :donor, :receiver, :leaderboard, 'waiting')"), 
+        {
+            'content': content, 'donor': donor, 
+            'receiver': receiver, 'leaderboard': leaderboard
+        }
+    )
+    db.session.commit() 
 
     return jsonify(success=True)
 
