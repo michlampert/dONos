@@ -1,8 +1,10 @@
 from flask import Flask
-from flaskext.mysql import MySQL
+from flask_sqlalchemy import SQLAlchemy
 
-
+db = SQLAlchemy()
 app = Flask(__name__)
-
-db = MySQL()
+app.config["SQLALCHEMY_DATABASE_URI"] = "mysql://root:password@db/db"
 db.init_app(app)
+
+# print(engine.connect())
+# cursor = db.get_db().cursor()
