@@ -48,19 +48,28 @@ def add_employee():
     return jsonify(success=True)
 
 
-@app.post('/leaderboard/add')
-def add_leaderboard():
-    comapny_name = request.json.get("name")
+@app.get('/leaderboard/')
+def get_leaderboard():
+    company_id = request.args.get('company_id')
 
-    company_id = get_company_id(comapny_name)
-
-    db.session.execute(
-        text("insert into Leaderboard (CompanyID) values (:company_id)"), 
+    results = db.session.execute(
+        text("select t1.FirstName, t1.LastName, pos, neg from"
+             " (select FirstName, LastName, SUM(Score) as pos from Employee"
+             "     join Donos on Donor = EmployeeID"
+             "     where CompanyID = :company_id group by FirstName, LastName) t1"
+             " join (select FirstName, LastName, SUM(Score) as neg"
+             " from Employee join Donos on Receiver = EmployeeID"
+             " where CompanyID = :company_id group by FirstName, LastName) t2 on"
+             " t1.FirstName = t2.FirstName and t1.LastName = t2.LastName;"),
         {'company_id': company_id}
     )
-    db.session.commit() 
 
-    return jsonify(success=True)
+    return [{
+        'name': result[0] + " " + result[1],
+        "pos": result[2],
+        "neg": result[3]
+    } for result in results]
+    
 
 
 @app.post('/donos/add')
@@ -68,14 +77,12 @@ def add_donos():
     content = request.json.get('content')
     donor = request.json.get('donor_id')
     receiver = request.json.get('receiver_id')
-    leaderboard = get_leaderboard(request.json.get('company_id'))
 
     db.session.execute(
-        text("insert into Donos (Content, Donor, Receiver, LeaderboardID, status) "
-             "values (:content, :donor, :receiver, :leaderboard, 'waiting')"), 
+        text("insert into Donos (Content, Donor, Receiver, status) "
+             "values (:content, :donor, :receiver, 'waiting')"), 
         {
-            'content': content, 'donor': donor, 
-            'receiver': receiver, 'leaderboard': leaderboard
+            'content': content, 'donor': donor, 'receiver': receiver
         }
     )
     db.session.commit() 

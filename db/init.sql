@@ -12,22 +12,13 @@ CREATE TABLE Employee (
     FOREIGN KEY (CompanyID) REFERENCES Company(CompanyID)
 );
 
-CREATE TABLE Leaderboard (
-    LeaderboardID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    CompanyID INT NOT NULL,
-
-    FOREIGN KEY (CompanyID) REFERENCES Company(CompanyID)
-);
-
 CREATE TABLE Donos (
     Content TEXT,
     Donor INT NOT NULL,
     Receiver INT NOT NULL,
-    LeaderboardID INT NOT NULL,
     Status ENUM('waiting', 'rejected', 'accepted') NOT NULL,
     Score INT,
 
     FOREIGN KEY (Donor) REFERENCES Employee(EmployeeID),
-    FOREIGN KEY (Receiver) REFERENCES Employee(EmployeeID),
-    FOREIGN KEY (LeaderboardID) REFERENCES Leaderboard(LeaderboardID)
+    FOREIGN KEY (Receiver) REFERENCES Employee(EmployeeID)
 );
