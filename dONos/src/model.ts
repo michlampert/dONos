@@ -3,6 +3,12 @@ export interface Points {
     minus: number,
 }
 
+export interface Person {
+    id: string,
+    name: string,
+    points: Points,
+}
+
 export const achievments = [
     {
         icon: "ribbon-outline",
