@@ -44,3 +44,11 @@ export function addDonos(content: string, donor: number, receiver: number): Bool
         }
       });
 }
+
+
+export function getMyName(myId: number): string {
+    const [error, ] = axios({
+        method: 'get',
+        url: `${baseUrl}/me/?id=${myId}`
+      });
+}

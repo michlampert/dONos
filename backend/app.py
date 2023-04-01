@@ -14,6 +14,21 @@ def home():
     return jsonify([result[1] for result in results])
 
 
+@app.get('/me/')
+def get_me():
+    employee_id = request.args.get('id')
+
+    results = db.session.execute(
+        text("select FirstName, LastName from Employee where EmployeeID = :employee_id"),
+        {'employee_id': employee_id}
+    ).fetchone()
+
+    return jsonify({
+        'name': results[0] + " " + results[1]
+    })
+    
+
+
 @app.post('/company/add/')
 def add_company():
     company_name = request.json.get('name')
