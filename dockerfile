@@ -7,4 +7,4 @@ RUN pip install -r requirements.txt
 
 COPY backend /backend
 ENTRYPOINT ["python"]
-CMD ["main.py"]
+CMD ["app.py"]
