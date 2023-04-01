@@ -1,0 +1,7 @@
+{
+  "name": "dONos",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite"
+}
