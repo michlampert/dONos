@@ -15,7 +15,7 @@
             <Achievement :icon="triangle" title="title" desc="desc"></Achievement>
 
             <NewDenunciation></NewDenunciation>
-            
+
         </ion-content>
 
     </ion-page>

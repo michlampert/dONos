@@ -1,42 +1,42 @@
 import axios from "axios";
 import { Person } from "./model";
 
-const baseUrl = "" // nie wiem jaki
+const baseUrl = "http://172.20.47.165:5000/" // nie wiem jaki
 
 
-export function addCompany(company: string): Boolean {
-    const [error, ] = axios({
+export async function addCompany(company: string) {
+    await axios({
         method: 'post',
-        url: "localhost:5000/company/add/",
+        url: `${baseUrl}/company/add/`,
         data: {
             name: company
         }
       });
 }
 
-export function addEmployee(firstName: string, lastName: string, company_id: number): Boolean {
-    const [error, ] = axios({
+export async function addEmployee(name: string, company_id: number) {
+    await axios({
         method: 'post',
-        url: "localhost:5000/employee/add/",
+        url: `${baseUrl}/employee/add/`,
         data: {
-            first_name: firstName,
-            last_name: lastName,
-            company_id: company_id
+            name,
+            company_id
         }
       });
 }
 
-export function getLeaderBoard(company_id: number): Person[] {
-    const [error, ] = axios({
+export function getLeaderBoard(company_id: number): Promise<Person[]> {
+    return axios<Person[]>({
         method: 'get',
-        url: `localhost:5000/leaderboard/?company=${company_id}`
-      });
+        url: `${baseUrl}/leaderboard/?company_id=${company_id}`
+      })
+      .then(response => response.data)
 }
 
 export function addDonos(content: string, donor: number, receiver: number): Boolean {
     const [error, ] = axios({
         method: 'post',
-        url: "localhost:5000/donos/add/",
+        url: `${baseUrl}/donos/add/`,
         data: {
             content: content,
             donor_id: donor,

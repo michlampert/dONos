@@ -7,12 +7,11 @@
             <LeaderboardProfile v-for="profile, index in profiles" :name="index + 1 + '. ' + profile.name"
                 :points="profile.points"></LeaderboardProfile>
 
-                <NewDenunciation></NewDenunciation>
-                
+            <NewDenunciation></NewDenunciation>
+
         </ion-content>
 
     </ion-page>
-
 </template>
 
 <script lang="ts">
@@ -21,12 +20,17 @@ import { IonPage, IonToolbar, IonTitle, IonContent, IonIcon, IonImg, IonGrid, Io
 import { defineComponent } from 'vue'
 import Header from '@/components/Header.vue'
 import NewDenunciation from '@/components/NewDenunciation.vue';
+import { getLeaderBoard } from '@/service';
+import { Person } from '../model'
 
 export default defineComponent({
     setup() {
-
-
-        return { }
+        return {}
+    },
+    data() {
+        return {
+            profiles: Array<Person>()
+        }
     },
     components: {
         IonPage,
@@ -42,13 +46,8 @@ export default defineComponent({
         Header,
         NewDenunciation,
     },
-    computed: {
-        profiles: () => [
-            { name: "dupa", points: { plus: 20, minus: 10 } },
-            { name: "dupa", points: { plus: 20, minus: 10 } },
-            { name: "dupa", points: { plus: 20, minus: 10 } },
-            { name: "dupa", points: { plus: 20, minus: 10 } },
-        ]
+    created() {
+        getLeaderBoard(1).then(persons => {console.log(persons);this.profiles = persons})
     }
 })
 </script>

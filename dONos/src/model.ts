@@ -4,7 +4,7 @@ export interface Points {
 }
 
 export interface Person {
-    id: string,
+    id?: string,
     name: string,
     points: Points,
 }
