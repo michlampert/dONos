@@ -1,9 +1,8 @@
 from app import app
 
-
 @app.get('/')
 def home():
-    return 'home'
+    return 'home1'
 
 
 if __name__ == "__main__":
