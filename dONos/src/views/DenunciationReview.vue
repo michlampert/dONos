@@ -36,7 +36,7 @@ import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonItemSliding, I
 import { defineComponent } from 'vue'
 import Header from '@/components/Header.vue';
 import { showToast } from '@/toast';
-import { getDonos } from '@/service';
+import { getDonos, acceptDonos, rejectDonos, superDonos } from '@/service';
 import DenunciationItem from '../components/DenunciationItem.vue'
 import { Denunciation } from '@/model';
 import { checkmarkOutline, closeOutline, heart } from 'ionicons/icons';
@@ -63,16 +63,19 @@ export default defineComponent({
   },
   methods: {
     acceptDenunciation(id: string) {
+      acceptDonos(id)
       this.denunciations = this.denunciations.filter(data => data.id != id)
-      showToast("accept")
+      showToast("Accepted")
     },
     superDenunciation(id: string) {
+      superDonos(id)
       this.denunciations = this.denunciations.filter(data => data.id != id)
-      showToast("super")
+      showToast("Super!")
     },
     rejectDenunciation(id: string) {
+      rejectDonos(id)
       this.denunciations = this.denunciations.filter(data => data.id != id)
-      showToast("reject")
+      showToast("Rejected")
     },
   }
 })

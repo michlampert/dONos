@@ -55,7 +55,7 @@ export function getMyName(myId: number): Promise<string> {
 }
 
 
-export function acceptDonos(donosID: number): void {
+export function acceptDonos(donosID: string): void {
     axios<void>({
         method: 'post',
         url: `${baseUrl}/donos/${donosID}/accept`
@@ -63,14 +63,14 @@ export function acceptDonos(donosID: number): void {
 }
 
 
-export function rejectDonos(donosID: number): void {
+export function rejectDonos(donosID: string): void {
     axios<void>({
         method: 'post',
         url: `${baseUrl}/donos/${donosID}/reject`
     })
 }
 
-export function superDonos(donosID: number): void {
+export function superDonos(donosID: string): void {
     axios<void>({
         method: 'post',
         url: `${baseUrl}/donos/${donosID}/super`
