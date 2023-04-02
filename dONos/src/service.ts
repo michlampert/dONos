@@ -1,9 +1,9 @@
 import axios from "axios";
 import { Person, Denunciation } from "./model";
 
-// const baseUrl = "http://172.20.47.165:5000" // nie wiem jaki
+const baseUrl = "http://172.20.47.165:5000" // nie wiem jaki
 
-const baseUrl = "http://172.18.0.1:5000" // nie wiem jaki
+// const baseUrl = "http://172.18.0.1:5000" // nie wiem jaki
 
 
 export async function addCompany(company: string) {
