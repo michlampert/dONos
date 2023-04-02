@@ -16,6 +16,7 @@ export interface Denunciation {
     donor_name: string,
     receiver_name: string,
     content: string,
+    base64Data?: string,
 }
 
 export const achievments = [

@@ -1,11 +1,13 @@
 <template>
     <ion-page>
         <Header></Header>
-        
+
         <ion-content :fullscreen="true">
-            <hr style="border-top: 10px solid red; margin-left: 93%; margin-right: 1%;">
+            <ion-progress-bar :value="0.93"></ion-progress-bar>
             <vue-countdown :time=timeLeft() v-slot="{ days, hours, minutes, seconds }">
-                <p style="padding-left: 15px; align: center;">Time Remaining: {{ days }} days, {{ hours }} hours, {{ minutes }} minutes, {{ seconds }} seconds.</p>
+                <p style="text-align: center;">
+                    Time Remaining: {{ days }}d {{ hours }}h {{ minutes }}m {{ seconds }}s
+                </p>
             </vue-countdown>
             <hr>
             <LeaderboardProfile v-for="profile, index in profiles" :name="index + 1 + '. ' + profile.name"
@@ -20,7 +22,7 @@
 
 <script lang="ts">
 import LeaderboardProfile from '@/components/LeaderboardProfile.vue';
-import { IonPage, IonToolbar, IonTitle, IonContent, IonIcon, IonImg, IonGrid, IonRow, IonCol, IonFab, IonFabButton } from '@ionic/vue';
+import { IonPage, IonToolbar, IonTitle, IonContent, IonIcon, IonImg, IonGrid, IonRow, IonCol, IonFab, IonFabButton, IonProgressBar } from '@ionic/vue';
 import { defineComponent } from 'vue'
 import Header from '@/components/Header.vue'
 import NewDenunciation from '@/components/NewDenunciation.vue';
@@ -52,13 +54,14 @@ export default defineComponent({
         IonImg,
         IonGrid, IonRow, IonCol,
         IonFab, IonFabButton,
+        IonProgressBar,
 
         LeaderboardProfile,
         Header,
         NewDenunciation,
     },
     created() {
-        getLeaderBoard(1).then(persons => {console.log(persons);this.profiles = persons})
+        getLeaderBoard(1).then(persons => { console.log(persons); this.profiles = persons })
     }
 })
 </script>

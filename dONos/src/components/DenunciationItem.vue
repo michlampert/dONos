@@ -7,11 +7,12 @@
                 <p>Reason: {{ denunciation?.content }}</p>
             </ion-text>
         </ion-label>
+        <ion-img v-if="denunciation?.base64Data" :src="'data:image/jpeg;base64,' + denunciation?.base64Data"></ion-img>
     </ion-item>
 </template>
 
 <script lang="ts">
-import { IonIcon, IonItem, IonLabel, IonText } from '@ionic/vue';
+import { IonIcon, IonImg, IonItem, IonLabel, IonText } from '@ionic/vue';
 import { PropType, defineComponent } from 'vue'
 import { Denunciation } from '../model'
 
@@ -29,6 +30,7 @@ export default defineComponent({
         IonIcon,
         IonLabel,
         IonText,
+        IonImg,
     }
 })
 </script>

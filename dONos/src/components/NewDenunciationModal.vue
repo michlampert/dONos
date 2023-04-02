@@ -18,20 +18,20 @@
     </ion-header>
     <ion-content class="ion-padding">
         <ion-item>
-            <ion-label position="stacked">Receivers</ion-label>
-            <ion-input :value="input" type="number" placeholder="Your name" @ionInput="onInput($event)"></ion-input>
+            <ion-label position="stacked">Target</ion-label>
+            <ion-input :value="input" type="number" placeholder="Select name" @ionInput="onInput($event)"></ion-input>
         </ion-item>
 
         <ion-item>
             <ion-label position="stacked">Enter your name</ion-label>
             <ion-input :value="content" type="text" placeholder="Your name" @ionInput="onContent($event)"></ion-input>
         </ion-item>
-        <br>
-        User {{ input }} will be reported! <br><br>
-        Reason: {{ content }}
+
         <ion-item>
-            <ion-button @click="takePhoto()">Take Photo</ion-button>
+            <ion-img :src="src" v-if="src != ''"></ion-img>
+            <ion-button @click="takePhoto()" v-if="src == ''">Take Photo</ion-button>
         </ion-item>
+        <ion-img v-if="base64Data != ''" :src="'data:image/jpeg;base64,' + base64Data"></ion-img>
     </ion-content>
 </template>
   
@@ -49,31 +49,32 @@ import {
     IonRow,
     IonCol,
     modalController,
+    IonImg,
 } from '@ionic/vue';
 import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera';
+import { Filesystem } from '@capacitor/filesystem';
 import { defineComponent, ref } from 'vue';
 import { showToast } from '../toast'
 import { addDonos } from '@/service';
-
-import { Plugins } from '@capacitor/core';
+import { profileStore } from '@/state';
+import { mapStores } from 'pinia';
 
 export default defineComponent({
     name: 'Modal',
-    components: { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonButton, IonItem, IonLabel, IonInput, IonRow, IonCol, },
+    components: { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonButton, IonItem, IonLabel, IonInput, IonRow, IonCol, IonImg },
+    data() {
+        return {
+            src: "",
+            base64Data: ""
+        }
+    },
     setup() {
 
         const input = ref('');
         const content = ref('');
 
-        const takePhoto = async () => {
-            const photo = await Camera.getPhoto({
-                resultType: CameraResultType.Uri,
-                source: CameraSource.Camera,
-                quality: 100,
-            });
-        };
         return {
-            takePhoto, input, content
+            input, content
         };
     },
     methods: {
@@ -81,7 +82,7 @@ export default defineComponent({
             return modalController.dismiss(null, 'cancel');
         },
         confirm() {
-            addDonos(this.content, '1', this.input)
+            addDonos(this.content, this.profileStore.name, this.input)
             showToast("Good job! :)")
             return modalController.dismiss(null, 'confirm');
         },
@@ -92,7 +93,20 @@ export default defineComponent({
         onContent(ev: any) {
             const value = ev.target!.value;
             this.content = value;
+        },
+        takePhoto() {
+            Camera.getPhoto({
+                resultType: CameraResultType.Base64,
+                source: CameraSource.Camera,
+                quality: 100,
+            }).then(async base64 => {
+                this.base64Data = base64.base64String!;
+                console.log(this.base64Data)
+            });
         }
     },
+    computed: {
+        ...mapStores(profileStore)
+    }
 });
 </script>
