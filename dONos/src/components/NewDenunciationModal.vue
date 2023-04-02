@@ -24,11 +24,12 @@
 
         <ion-item>
             <ion-label position="stacked">Enter your name</ion-label>
-            <ion-input ref="input" type="text" placeholder="Your name"></ion-input>
+            <ion-input ref="content" type="text" placeholder="Your name"></ion-input>
         </ion-item>
-        <ion-item>
+        {{ input }} {{ content }}
+        <!-- <ion-item>
             <ion-button @click="takePhoto()">Take Photo</ion-button>
-        </ion-item>
+        </ion-item> -->
     </ion-content>
 </template>
   
@@ -53,6 +54,12 @@ import { defineComponent } from 'vue';
 import { showToast } from '../toast'
 
 export default defineComponent({
+    data() {
+        return {
+            input: 0,
+            content: "",
+        }
+    },
     name: 'Modal',
     components: { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonButton, IonItem, IonLabel, IonInput, IonRow, IonCol, },
     setup() {

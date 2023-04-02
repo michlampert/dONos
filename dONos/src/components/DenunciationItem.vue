@@ -2,9 +2,9 @@
     <ion-item>
         <ion-label>
             <ion-text>
-                <p><b>{{ denunciation?.id1 }}</b></p>
-                <p><b>{{ denunciation?.id2 }}</b></p>
-                <p>{{ denunciation?.content }}</p>
+                <p>Donor: <b>{{ denunciation?.donor_name }}</b></p>
+                <p>Receiver: <b>{{ denunciation?.receiver_name }}</b></p>
+                <p>Reason: {{ denunciation?.content }}</p>
             </ion-text>
         </ion-label>
     </ion-item>

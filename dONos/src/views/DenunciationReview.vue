@@ -4,20 +4,22 @@
     <ion-content :fullscreen="true">
       <ion-item-sliding v-for="denunciation in denunciations">
         <ion-item-options side="start" expandable>
-          <ion-item-option color="success" @click="acceptDenunciation()" expandable @ionSwape="acceptDenunciation()">
-            <!-- <ion-icon slot="icon-only" :icon="archive"></ion-icon> -->
+          <ion-item-option color="success" @click="acceptDenunciation(denunciation.id)" expandable
+            @ionSwipe="acceptDenunciation(denunciation.id)">
+            <ion-icon slot="icon-only" :icon="checkmarkOutline"></ion-icon>
             accept
           </ion-item-option>
 
-          <ion-item-option color="primary" @click="superDenunciation()">
-            <!-- <ion-icon slot="icon-only" :icon="archive"></ion-icon> -->
+          <ion-item-option color="primary" @click="superDenunciation(denunciation.id)">
+            <ion-icon slot="icon-only" :icon="heart"></ion-icon>
             super
           </ion-item-option>
         </ion-item-options>
 
         <ion-item-options side="end" expandable>
-          <ion-item-option color="danger" @click="rejectDenunciation()" expandable @ionSwape="rejectDenunciation()">
-            <!-- <ion-icon slot="icon-only" :icon="archive"></ion-icon> -->
+          <ion-item-option color="danger" @click="rejectDenunciation(denunciation.id)" expandable
+            @ionSwipe="rejectDenunciation(denunciation.id)">
+            <ion-icon slot="icon-only" :icon="closeOutline"></ion-icon>
             reject
           </ion-item-option>
         </ion-item-options>
@@ -37,6 +39,7 @@ import { showToast } from '@/toast';
 import { getDonos } from '@/service';
 import DenunciationItem from '../components/DenunciationItem.vue'
 import { Denunciation } from '@/model';
+import { checkmarkOutline, closeOutline, heart } from 'ionicons/icons';
 
 export default defineComponent({
   data() {
@@ -47,7 +50,7 @@ export default defineComponent({
   setup() {
 
 
-    return {}
+    return { checkmarkOutline, closeOutline, heart }
   },
   components: {
     IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonItemSliding, IonItemOptions, IonItemOption, IonItem, IonIcon, IonLabel,
@@ -59,13 +62,16 @@ export default defineComponent({
     getDonos(1).then(data => this.denunciations = data)
   },
   methods: {
-    acceptDenunciation() {
+    acceptDenunciation(id: string) {
+      this.denunciations = this.denunciations.filter(data => data.id != id)
       showToast("accept")
     },
-    superDenunciation() {
+    superDenunciation(id: string) {
+      this.denunciations = this.denunciations.filter(data => data.id != id)
       showToast("super")
     },
-    rejectDenunciation() {
+    rejectDenunciation(id: string) {
+      this.denunciations = this.denunciations.filter(data => data.id != id)
       showToast("reject")
     },
   }
