@@ -61,6 +61,20 @@ def add_employee():
     return jsonify(success=True)
 
 
+@app.get('/employee/')
+def get_employees():
+    company_id = request.args.get('company_id')
+
+    results = db.session.execute(
+        text("select EmployeeID, Name from Employee where CompanyID = :company_id"),
+        {'company_id': company_id}
+    )
+    return [{
+        'id': result[0],
+        'name': result[1]
+    } for result in results]
+
+
 @app.get('/leaderboard/')
 def get_leaderboard():
     company_id = request.args.get('company_id')
