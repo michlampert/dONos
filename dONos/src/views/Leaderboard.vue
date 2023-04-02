@@ -1,11 +1,13 @@
 <template>
     <ion-page>
         <Header></Header>
-
+        
         <ion-content :fullscreen="true">
-            <vue-countdown :time="2 * 24 * 60 * 60 * 1000" v-slot="{ days, hours, minutes, seconds }">
-                Time Remaining：{{ days }} days, {{ hours }} hours, {{ minutes }} minutes, {{ seconds }} seconds.
+            <hr style="border-top: 10px solid red; margin-left: 93%; margin-right: 1%;">
+            <vue-countdown :time=timeLeft() v-slot="{ days, hours, minutes, seconds }">
+                <p style="padding-left: 15px; align: center;">Time Remaining: {{ days }} days, {{ hours }} hours, {{ minutes }} minutes, {{ seconds }} seconds.</p>
             </vue-countdown>
+            <hr>
             <LeaderboardProfile v-for="profile, index in profiles" :name="index + 1 + '. ' + profile.name"
                 :points="profile.points"></LeaderboardProfile>
 
@@ -32,6 +34,13 @@ export default defineComponent({
     data() {
         return {
             profiles: Array<Person>()
+        }
+    },
+    methods: {
+        timeLeft() {
+            const current = Date.now();
+            const difference = 1680479999000 - Date.now()
+            return difference
         }
     },
     components: {

@@ -1,7 +1,9 @@
 import axios from "axios";
 import { Person, Denunciation } from "./model";
 
-const baseUrl = "http://172.20.47.165:5000" // nie wiem jaki
+// const baseUrl = "http://172.20.47.165:5000" // nie wiem jaki
+
+const baseUrl = "http://172.18.0.1:5000" // nie wiem jaki
 
 
 export async function addCompany(company: string) {
@@ -33,10 +35,10 @@ export function getLeaderBoard(company_id: number): Promise<Person[]> {
         .then(response => response.data)
 }
 
-export function addDonos(content: string, donor: number, receiver: number): void {
+export function addDonos(content: string, donor: string, receiver: string): void {
     axios<void>({
         method: 'post',
-        url: `${baseUrl}/donos/add/`,
+        url: `${baseUrl}/donos/add`,
         data: {
             content: content,
             donor_id: donor,

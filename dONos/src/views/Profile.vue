@@ -21,12 +21,12 @@
           <ion-label>stwórz nową</ion-label>
         </ion-button>
       </ion-item>
-      Hello {{ myName }}! 
+      Hello {{ myName }}!
 
-      
+
 
       <NewDenunciation></NewDenunciation>
-    
+
     </ion-content>
 
   </ion-page>
@@ -45,12 +45,12 @@ import { getMyName } from '../service'
 
 export default defineComponent({
   setup() {
-    const myName=ref('')
+    const myName = ref('')
 
-    const getName = async ()=> {
+    const getName = async () => {
       const value = await getMyName(1);
 
-      myName.value=value;
+      myName.value = value;
     };
 
     getName();
