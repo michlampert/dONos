@@ -107,12 +107,13 @@ def add_donos():
     content = request.json.get('content')
     donor = request.json.get('donor_id')
     receiver = request.json.get('receiver_id')
+    image = request.json.get('image')
 
     db.session.execute(
-        text("insert into Donos (Content, Donor, Receiver, status, score) "
-             "values (:content, :donor, :receiver, 'waiting', 0)"), 
+        text("insert into Donos (Content, Donor, Receiver, status, score, image) "
+             "values (:content, :donor, :receiver, 'waiting', 0, :image)"), 
         {
-            'content': content, 'donor': donor, 'receiver': receiver
+            'content': content, 'donor': donor, 'receiver': receiver, 'image': image
         }
     )
     db.session.commit() 
@@ -164,7 +165,7 @@ def get_donos():
     company_id = request.args.get('company_id')
 
     results = db.session.execute(
-        text("select DonosID, Content, d.Name as dName, r.Name as rName"
+        text("select DonosID, Content, d.Name as dName, r.Name as rName, Image"
              " from Donos join Employee as d on d.EmployeeID = Donor"
              " join Employee as r on r.EmployeeID = Receiver"
              " where Status = 'waiting' and d.CompanyID = :company_id;"),
@@ -175,7 +176,8 @@ def get_donos():
         'id': result[0],
         'content': result[1],
         'donor_name': result[2],
-        'receiver_name': result[3]
+        'receiver_name': result[3], 
+        'image': result[4]
     } for result in results]
 
 

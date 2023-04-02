@@ -35,14 +35,15 @@ export function getLeaderBoard(company_id: number): Promise<Person[]> {
         .then(response => response.data)
 }
 
-export function addDonos(content: string, donor: string, receiver: string): void {
+export function addDonos(content: string, donor: string, receiver: string, image: string): void {
     axios<void>({
         method: 'post',
         url: `${baseUrl}/donos/add`,
         data: {
             content: content,
             donor_id: donor,
-            receiver_id: receiver
+            receiver_id: receiver,
+            image: image
         }
     });
 }
