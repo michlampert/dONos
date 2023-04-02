@@ -82,7 +82,7 @@ export default defineComponent({
             return modalController.dismiss(null, 'cancel');
         },
         confirm() {
-            addDonos(this.content, this.profileStore.name, this.input, this.base64Data)
+            addDonos(this.content, '1', this.input, this.base64Data)
             showToast("Good job! :)")
             return modalController.dismiss(null, 'confirm');
         },
