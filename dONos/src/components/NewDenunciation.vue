@@ -27,7 +27,6 @@ import {
 } from '@ionic/vue';
 import { defineComponent, ref } from 'vue';
 import { add } from 'ionicons/icons';
-import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera';
 import Modal from './NewDenunciationModal.vue'
 
 export default defineComponent({

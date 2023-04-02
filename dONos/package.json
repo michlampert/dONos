@@ -12,7 +12,7 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@capacitor/android": "4.7.3",
+    "@capacitor/android": "^4.7.3",
     "@capacitor/app": "4.1.1",
     "@capacitor/camera": "^4.1.4",
     "@capacitor/core": "4.7.3",
@@ -28,7 +28,7 @@
     "vue-router": "^4.1.6"
   },
   "devDependencies": {
-    "@capacitor/cli": "4.7.3",
+    "@capacitor/cli": "^4.7.3",
     "@vitejs/plugin-vue": "^4.0.0",
     "@vue/eslint-config-typescript": "^11.0.2",
     "@vue/test-utils": "^2.3.0",
