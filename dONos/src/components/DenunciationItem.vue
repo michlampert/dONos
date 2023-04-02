@@ -5,9 +5,13 @@
                 <p>Donor: <b>{{ denunciation?.donor_name }}</b></p>
                 <p>Receiver: <b>{{ denunciation?.receiver_name }}</b></p>
                 <p>Reason: {{ denunciation?.content }}</p>
+
+                <p>
+                    <ion-img v-if="denunciation?.base64Data"
+                        :src="'data:image/jpeg;base64,' + denunciation?.base64Data"></ion-img>
+                </p>
             </ion-text>
         </ion-label>
-        <ion-img v-if="denunciation?.base64Data" :src="'data:image/jpeg;base64,' + denunciation?.base64Data"></ion-img>
     </ion-item>
 </template>
 
@@ -35,4 +39,8 @@ export default defineComponent({
 })
 </script>
 
-<style scoped></style>
+<style scoped>
+ion-img {
+    height: 200px;
+}
+</style>
