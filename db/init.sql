@@ -18,7 +18,7 @@ CREATE TABLE Donos (
     Receiver INT NOT NULL,
     Status ENUM('waiting', 'rejected', 'accepted') NOT NULL,
     Score INT,
-    Image BLOB,
+    Image LONGBLOB,
 
     FOREIGN KEY (Donor) REFERENCES Employee(EmployeeID),
     FOREIGN KEY (Receiver) REFERENCES Employee(EmployeeID)

@@ -107,7 +107,7 @@ def add_donos():
     content = request.json.get('content')
     donor = request.json.get('donor_id')
     receiver = request.json.get('receiver_id')
-    image = request.json.get('image')
+    image = request.json.get('image', 'null')
 
     db.session.execute(
         text("insert into Donos (Content, Donor, Receiver, status, score, image) "
@@ -177,7 +177,7 @@ def get_donos():
         'content': result[1],
         'donor_name': result[2],
         'receiver_name': result[3], 
-        'image': result[4]
+        'base64Data': result[4].decode('utf-8')
     } for result in results]
 
 
