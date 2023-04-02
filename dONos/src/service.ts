@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Person } from "./model";
+import { Person, Denunciation } from "./model";
 
 const baseUrl = "http://172.20.47.165:5000" // nie wiem jaki
 
@@ -50,13 +50,8 @@ export function getMyName(myId: number): Promise<string> {
     return axios<{name: string}>({
         method: 'get',
         url: `${baseUrl}/me/?id=${myId}`
-<<<<<<< HEAD
-    })
-        .then(response => response.data)
-=======
       })
       .then(response => response.data.name)
->>>>>>> eb1fde8 (change in service file)
 }
 
 
@@ -82,8 +77,8 @@ export function superDonos(donosID: number): void {
     })
 }
 
-export function getDonos(companyID: number): Promise<Donos> {
-    axios<Donos>({
+export function getDonos(companyID: number): Promise<Denunciation[]> {
+    return axios<Denunciation[]>({
         method: 'get',
         url: `${baseUrl}/donos/?company_id=${companyID}`
     })

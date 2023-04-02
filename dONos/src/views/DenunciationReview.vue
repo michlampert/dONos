@@ -2,7 +2,7 @@
   <ion-page>
     <Header></Header>
     <ion-content :fullscreen="true">
-      <ion-item-sliding>
+      <ion-item-sliding v-for="denunciation in denunciations">
         <ion-item-options side="start" expandable>
           <ion-item-option color="success" @click="acceptDenunciation()" expandable @ionSwape="acceptDenunciation()">
             <!-- <ion-icon slot="icon-only" :icon="archive"></ion-icon> -->
@@ -22,8 +22,7 @@
           </ion-item-option>
         </ion-item-options>
 
-          <DenunciationItem :denunciation="{
-            id1: 'asd', id2: 'dsa' , content:'dupa'}"></DenunciationItem>
+        <DenunciationItem :denunciation="denunciation"></DenunciationItem>
       </ion-item-sliding>
 
     </ion-content>
@@ -35,9 +34,16 @@ import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonItemSliding, I
 import { defineComponent } from 'vue'
 import Header from '@/components/Header.vue';
 import { showToast } from '@/toast';
+import { getDonos } from '@/service';
 import DenunciationItem from '../components/DenunciationItem.vue'
+import { Denunciation } from '@/model';
 
 export default defineComponent({
+  data() {
+    return {
+      denunciations: Array<Denunciation>()
+    }
+  },
   setup() {
 
 
@@ -48,6 +54,9 @@ export default defineComponent({
 
     Header,
     DenunciationItem,
+  },
+  created() {
+    getDonos(1).then(data => this.denunciations = data)
   },
   methods: {
     acceptDenunciation() {

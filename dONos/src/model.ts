@@ -13,8 +13,8 @@ export interface Person {
 
 export interface Denunciation {
     id: string,
-    id1: string,
-    id2: string,
+    donor_name: string,
+    receiver_name: string,
     content: string,
 }
 
