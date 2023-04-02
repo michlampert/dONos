@@ -27,7 +27,7 @@
             <ion-input ref="input" type="text" placeholder="Your name"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-button @click="usePhotoGallery()">Take Photo</ion-button>
+            <ion-button @click="takePhoto()">Take Photo</ion-button>
         </ion-item>
     </ion-content>
 </template>
@@ -55,20 +55,20 @@ import { showToast } from '../toast'
 export default defineComponent({
     name: 'Modal',
     components: { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonButton, IonItem, IonLabel, IonInput, IonRow, IonCol, },
-    methods: {
-        async usePhotoGallery() {
-            const takePhoto = async () => {
-                const photo = await Camera.getPhoto({
-                    resultType: CameraResultType.Uri,
-                    source: CameraSource.Camera,
-                    quality: 100,
-                });
-            };
+    setup() {
+        const takePhoto = async () => {
+            const photo = await Camera.getPhoto({
+                resultType: CameraResultType.Uri,
+                source: CameraSource.Camera,
+                quality: 100,
+            });
+        };
 
-            return {
-                takePhoto,
-            };
-        },
+        return {
+            takePhoto,
+        };
+    },
+    methods: {
         cancel() {
             return modalController.dismiss(null, 'cancel');
         },
