@@ -8,12 +8,8 @@
                 </ion-toolbar>
             </ion-header>
 
-            <Achievement :icon="triangle" title="title" desc="desc"></Achievement>
-            <Achievement :icon="triangle" title="title" desc="desc" :is-active="true"></Achievement>
-            <Achievement :icon="triangle" title="title" desc="desc"></Achievement>
-            <Achievement :icon="triangle" title="title" desc="desc" :is-active="true"></Achievement>
-            <Achievement :icon="triangle" title="title" desc="desc"></Achievement>
-
+            <Achievement v-for="a in achievments" :icon="a.icon" :title="a.title" :desc="a.desc" :is-active="true"></Achievement>
+            
             <NewDenunciation></NewDenunciation>
 
         </ion-content>
@@ -28,12 +24,13 @@ import { triangle } from 'ionicons/icons';
 import { defineComponent } from 'vue'
 import Header from '@/components/Header.vue';
 import NewDenunciation from '@/components/NewDenunciation.vue';
+import { achievments } from '@/model';
 
 export default defineComponent({
     setup() {
 
 
-        return { triangle }
+        return { achievments }
     },
     components: {
     Achievement,

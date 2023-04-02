@@ -47,11 +47,16 @@ export function addDonos(content: string, donor: number, receiver: number): void
 
 
 export function getMyName(myId: number): Promise<string> {
-    return axios<string>({
+    return axios<{name: string}>({
         method: 'get',
         url: `${baseUrl}/me/?id=${myId}`
+<<<<<<< HEAD
     })
         .then(response => response.data)
+=======
+      })
+      .then(response => response.data.name)
+>>>>>>> eb1fde8 (change in service file)
 }
 
 

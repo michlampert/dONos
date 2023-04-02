@@ -22,11 +22,8 @@
           </ion-item-option>
         </ion-item-options>
 
-        <ion-item>
-          <ion-label>
-            dupa
-          </ion-label>
-        </ion-item>
+          <DenunciationItem :denunciation="{
+            id1: 'asd', id2: 'dsa' , content:'dupa'}"></DenunciationItem>
       </ion-item-sliding>
 
     </ion-content>
@@ -38,6 +35,7 @@ import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonItemSliding, I
 import { defineComponent } from 'vue'
 import Header from '@/components/Header.vue';
 import { showToast } from '@/toast';
+import DenunciationItem from '../components/DenunciationItem.vue'
 
 export default defineComponent({
   setup() {
@@ -48,7 +46,8 @@ export default defineComponent({
   components: {
     IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonItemSliding, IonItemOptions, IonItemOption, IonItem, IonIcon, IonLabel,
 
-    Header
+    Header,
+    DenunciationItem,
   },
   methods: {
     acceptDenunciation() {

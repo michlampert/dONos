@@ -1,3 +1,5 @@
+import { ribbonOutline, diamondOutline, personOutline, thumbsUpOutline, timeOutline, calendarOutline, calendarNumberOutline, cameraOutline, peopleOutline, mapOutline, flameOutline, fishOutline, flowerOutline, fingerPrintOutline, trophyOutline, cartOutline, nutritionOutline, bedOutline, telescopeOutline, logoFacebook, gameControllerOutline, logoAmazon, flame } from "ionicons/icons"
+
 export interface Points {
     plus: number,
     minus: number,
@@ -9,144 +11,151 @@ export interface Person {
     points: Points,
 }
 
+export interface Denunciation {
+    id: string,
+    id1: string,
+    id2: string,
+    content: string,
+}
+
 export const achievments = [
     {
-        icon: "ribbon-outline",
+        icon: ribbonOutline,
         title: "Donos tygodnia",
         desc: "Donos wyróżniający się na tle innych złożonych w danym tygodniu. Najbardziej dotkliwy, najzabawniejszy, a może została zgłoszona najtrudniejsza do wykrycia zbrodnia? ",
     },
     {
-        icon: "diamond-outline",
+        icon: diamondOutline,
         title: "Senior donosiciel",
         desc: "Zaawansowany donosiciel, który wykonał już 100 donosów.",
     },
     {
-        icon: "person-outline",
+        icon: personOutline,
         title: "Donosiciel",
         desc: "Osoba dla której donosy nie są już niczym nowym. Odblokowany po 10 donosach.",
     },
     {
-        icon: "thumbs-up-outline",
+        icon: thumbsUpOutline,
         title: "Junior donosiciel",
         desc: "Brawo! Wykonałeś już swój pierwszy donos!",
     },
     {
-        icon: "time-outline",
+        icon: timeOutline,
         title: "Pierwszy donos w ciągu dnia.",
         desc: "Super! Zacząłeś dzień od donosu.",
     },
     {
-        icon: "calendar-outline",
+        icon: calendarOutline,
         title: "Tydzień donoszenia",
         desc: "Wykonałeś donosy każdego dnia w danym tygodniu.",
     },
     {
-        icon: "calendar-number-outline",
+        icon: calendarNumberOutline,
         title: "Wytrwały donosiciel",
         desc: "Twoja wytrwałość jest godna podziwu! Wykonałeś donosy każdego dnia w danym miesiącu.",
     },
     {
-        icon: "camera-outline",
+        icon: cameraOutline,
         title: "Fotodonos",
         desc: "Zamieściłeś w donosie zdjęcie.",
     },
     {
-        icon: "people-outline",
+        icon: peopleOutline,
         title: "Współdonos",
         desc: "Ten sam donos zamieściły co najmniej dwie osoby.",
     },
     {
-        icon: "map-outline",
+        icon: mapOutline,
         title: "Wszystkie lokalizacje",
         desc: "Twoje donosy dotyczyły wszystkich dostępnych miejsc w obrębie korpomapy: biuro, kuchnia, pokój socjalny, toaleta.",
     },
     {
-        icon: "map-outline",
+        icon: mapOutline,
         title: "Cichacz",
         desc: "Dbasz o niezakłócanie ciszy w biurze.",
     },
     {
-        icon: "flame-outline",
+        icon: flameOutline,
         title: "Strażak",
         desc: "Pilnujesz, żeby nikt nie przypalał jedzenia w biurowej kuchence mikrofalowej.",
     },
     {
-        icon: "fish-outline",
+        icon: fishOutline,
         title: "Śledzik",
         desc: "Pilnujesz, żeby nie odgrzewać we wspólnej mikroweli śmierdzącego jedzenia - w tym ryb.",
-    },    
+    },
     {
-        icon: "fish-outline",
+        icon: fishOutline,
         title: "Segregator",
         desc: "Pilnujesz, żeby segregować prawidłowo śmieci",
-    },    
+    },
     {
-        icon: "flower-outline",
+        icon: flowerOutline,
         title: "Czyścioszek",
         desc: "Pilnujesz, żeby współpracownicy dbali o higienę osobistą, oszczędzając innym przykrych doświadczeń.",
-    },    
+    },
     {
-        icon: "flower-outline",
+        icon: flowerOutline,
         title: "Prohibitor",
         desc: "Zgłosiłeś picie alkoholu w pracy lub przyjście do niej pijanym.",
-    },    
+    },
     {
-        icon: "finger-print-outline",
+        icon: fingerPrintOutline,
         title: "Bezpiecznik",
         desc: "Zgłosiłeś niezablokowanie komputera po odejściu od stanowiska pracy lub inne nadużycie prowadzące do narażenia danych firmy.",
-    },    
+    },
     {
-        icon: "trophy-outline",
+        icon: trophyOutline,
         title: "Achievement achievement",
         desc: "Dostałeś achievement za zebranie 15 achievementów.",
-    },    
+    },
     {
-        icon: "cart-outline",
+        icon: cartOutline,
         title: "Schowaj kumplowi rzeczy",
         desc: "Ktoś doniósł, że schowałeś komuś rzeczy.",
-    },    
+    },
     {
-        icon: "nutrition-outline",
+        icon: nutritionOutline,
         title: "Obrońca owoców",
         desc: "Pilnujesz, żeby nikt nie wychodził ponad swój owocowy przydział w owocowy czwartek - zgłosiłeś to naganne zachowanie.",
-    },    
+    },
     {
-        icon: "bed-outline",
+        icon: bedOutline,
         title: "Śpioszek",
         desc: "Doniosłeś o spaniu w pracy.",
-    },    
+    },
     {
-        icon: "bed-outline",
+        icon: bedOutline,
         title: "Top model",
         desc: "Doniosłeś o nieodpowiednim ubiorze w pracy.",
-    },    
+    },
     {
-        icon: "telescope-outline",
+        icon: telescopeOutline,
         title: "Sokole oko",
         desc: "Zgłosiłeś coś trudnego do zauważenia.",
-    },    
+    },
     {
-        icon: "logo-facebook",
+        icon: logoFacebook,
         title: "Marek Zuckerberg",
         desc: "Zgłosiłeś siedzenie w pracy na facebooku.",
-        
+
     },
     {
-        icon: "logo-facebook",
+        icon: logoFacebook,
         title: "YouTube destroyer",
         desc: "Zgłosiłeś oglądanie filmików w czasie pracy.",
-        
+
     },
     {
-        icon: "game-controller-outline",
+        icon: gameControllerOutline,
         title: "Game over",
         desc: "Doniosłeś na granie w godzinach pracy.",
-        
+
     },
     {
-        icon: "logo-amazon",
+        icon: logoAmazon,
         title: "Besos",
         desc: "Zgłosiłeś robienie zakupów w czasie pracy.",
-        
+
     },
 ]

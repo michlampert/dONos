@@ -23,6 +23,8 @@
       </ion-item>
       Hello {{ myName }}! 
 
+      
+
       <NewDenunciation></NewDenunciation>
     
     </ion-content>
