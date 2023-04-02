@@ -3,7 +3,9 @@
         <Header></Header>
 
         <ion-content :fullscreen="true">
-
+            <vue-countdown :time="2 * 24 * 60 * 60 * 1000" v-slot="{ days, hours, minutes, seconds }">
+                Time Remaining：{{ days }} days, {{ hours }} hours, {{ minutes }} minutes, {{ seconds }} seconds.
+            </vue-countdown>
             <LeaderboardProfile v-for="profile, index in profiles" :name="index + 1 + '. ' + profile.name"
                 :points="profile.points"></LeaderboardProfile>
 

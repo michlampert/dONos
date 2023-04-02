@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router';
+import VueCountdown from '@chenfengyuan/vue-countdown';
 
 import { IonicVue } from '@ionic/vue';
 
@@ -32,7 +33,8 @@ const app = createApp(App)
   })
   .use(router)
   .use(pinia);
-  
+
+app.component(VueCountdown.name, VueCountdown);
 router.isReady().then(() => {
   app.mount('#app');
 });
