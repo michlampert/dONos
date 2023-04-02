@@ -30,9 +30,9 @@ export async function addEmployee(name: string, company_id: number) {
 export function getLeaderBoard(company_id: number): Promise<Person[]> {
     return axios<Person[]>({
         method: 'get',
-        url: `${baseUrl}/leaderboard/?company_id=${company_id}`
+        url: `http://172.20.47.165:5000/leaderboard/?company_id=${company_id}`
     })
-        .then(response => response.data)
+        .then(response => {console.log(response); return response.data})
 }
 
 export function addDonos(content: string, donor: string, receiver: string, image: string): void {

@@ -98,7 +98,7 @@ export default defineComponent({
             Camera.getPhoto({
                 resultType: CameraResultType.Base64,
                 source: CameraSource.Camera,
-                quality: 100,
+                quality: 10,
             }).then(async base64 => {
                 this.base64Data = base64.base64String!;
                 console.log(this.base64Data)
